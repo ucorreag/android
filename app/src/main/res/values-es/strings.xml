@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Enfoque Plurilingüe</string>
+    <string name="title_activity_preferences">Configuración de preferencias</string>
+    <string name="title_activity_sentences">Frases</string>
+
+    <string name="action_settings">Configuración</string>
+    <string name="sentences">Frases</string>
+    <string name="exercises">Ejercicios</string>
+    <string name="level">Nivel de Aprendizaje</string>
+    <string name="level_one">Primer Nivel</string>
+    <string name="statistics">Datos Estadísticos</string>
+
+
+    <string name="help">Ayuda</string>
+    <string name="configuration">Configuración</string>
+    <string name="lang">Seleccionar Idioma</string>
+    <string-array name="language">
+        <item>Español</item>
+        <item>Inglés</item>
+        <item>Francés</item>
+        <item>Italiano</item>
+        <item>Portugues</item>
+    </string-array>
+
+    <string name="slogan">Permítanos estudiar más idiomas para hablar una lengua común.</string>
+    <string name="navigation_drawer_close">Cierre la gaveta de navegación</string>
+    <string name="navigation_drawer_open">Abre ls gaveta de navegación</string>
+</resources>

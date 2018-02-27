@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_black"
+        />
+
+    <item android:title="@string/level">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_level_one"
+                android:icon="@drawable/ic_menu_level"
+                android:title="@string/level_one" />
+            </group>
+        </menu>
+    </item>
+
+     <item
+       android:id="@+id/nav_config"
+       android:icon="@drawable/ic_menu_manage"
+       android:title="@string/configuration" />
+     <item
+       android:id="@+id/nav_help"
+       android:icon="@drawable/ic_help"
+       android:title="@string/help" />
+
+
+
+</menu>

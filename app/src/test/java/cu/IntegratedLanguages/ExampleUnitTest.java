@@ -1,4 +1,4 @@
-package www.integratedlanguages;
+package cu.IntegratedLanguages;
 
 import org.junit.Test;
 

@@ -13,7 +13,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_plurilingual"
-    tools:context="www.integratedlanguages.Plurilingual">
+    tools:context="cu.IntegratedLanguages.Plurilingual">
 
 
 

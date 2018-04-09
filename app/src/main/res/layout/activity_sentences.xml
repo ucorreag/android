@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="www.integratedlanguages.Sentences"
+    tools:context="cu.IntegratedLanguages.Sentences"
     android:background="@color/background">
 
     <android.support.design.widget.AppBarLayout

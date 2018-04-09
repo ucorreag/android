@@ -10,4 +10,7 @@
     <color name="colorDivider">#DADFDF</color>
     <color name="blueGrey">#ECEFF1</color>
     <color name="background">#FFF</color>
+    <color name="colorError">#A00000</color>
+
+
 </resources>

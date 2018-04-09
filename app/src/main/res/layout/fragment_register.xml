@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
     android:id="@+id/fragment_register">
-    <ImageButton
-        android:id="@+id/return_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:contentDescription="@string/action_register"
-        android:background="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,17 +62,22 @@
             android:maxLines="1" />
 
     </android.support.design.widget.TextInputLayout>
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/repeat">
 
         <EditText
+
             android:id="@+id/repeat_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_repeat_password"
             android:inputType="textPassword"
-            android:maxLines="1" />
+            android:maxLines="1"
+            />
+
 
     </android.support.design.widget.TextInputLayout>
 

@@ -2,23 +2,139 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_horizontal_margin"
+
     android:id="@+id/fragment_home">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estadisticas"
-        style="@style/Base.TextAppearance.AppCompat.Title"
-        android:layout_gravity="center_horizontal"/>
-
-<LinearLayout
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="300dip"
-    android:id="@+id/statistics"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:layout_margin="@dimen/activity_horizontal_margin">
 
-</LinearLayout>
+
+
+        <TextView
+            android:text="@string/title_statics_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="16dip" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dip"
+            android:id="@+id/statistics"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_prev"
+                    android:layout_alignParentLeft="true"
+                    android:padding="0dip"
+                    style="@style/Base.Widget.AppCompat.ActionButton"
+                    android:src="@drawable/ic_action_left"/>
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:id="@+id/btn_now"
+                    android:layout_height="wrap_content"
+                    android:text="@string/week_now"
+                    android:padding="0dip"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true" />
+                <ImageButton
+                    android:padding="0dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_next"
+                    style="@style/Base.Widget.AppCompat.ActionButton"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_action_right"/>
+
+            </LinearLayout>
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:padding="8dip"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dip"
+            android:id="@+id/statistics_evaluation"
+            android:orientation="vertical">
+            <TextView
+                android:text="@string/title_evaluation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="16dip" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dip" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notifications"
+            android:layout_margin="5dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="new notification 1"
+                android:textStyle="italic"
+                android:textColor="@android:color/white"
+                android:padding="2dip"
+                android:layout_margin="2dip"
+
+                android:background="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="new notification 2"
+                android:textStyle="italic"
+                android:textColor="@android:color/white"
+                android:padding="2dip"
+                android:layout_margin="2dip"
+                android:background="@color/colorAccent"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+
 
 
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/exercise_type_four"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <!--Listen and write-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:text="@string/info_listen"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:gravity="center">
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:layout_marginRight="@dimen/fab_margin">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="0dip"
+               android:layout_weight="1"
+               android:id="@+id/txt_lang_listen_question"/>
+
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="0dip"
+               android:layout_weight="1"
+               android:id="@+id/img_lang_listen_question"/>
+
+       </LinearLayout>
+
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_play_speak"
+           android:background="@drawable/list_sector_3"
+           android:contentDescription="listen"
+
+
+           android:layout_marginRight="@dimen/fab_margin"
+           android:id="@+id/btn_listen"
+          />
+
+   </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_listen"
+        android:lines="4"
+        android:padding="@dimen/subject"
+        android:focusable="true"
+        android:background="@drawable/border_3"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/out"
+            android:id="@+id/out_btn_listen"/>
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            android:id="@+id/ok_btn_listen"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

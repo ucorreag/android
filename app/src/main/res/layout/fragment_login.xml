@@ -12,15 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="160dip"
+            android:minWidth="100dip"
+            android:minHeight="100dip"
             android:padding="@dimen/img_margin"
             android:id="@+id/image_user"
-            android:minHeight="160dip"
+
             android:background="@drawable/border_4_circular"
             android:layout_gravity="center_horizontal"/>
 
@@ -29,8 +31,9 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_2"
-        android:padding="@dimen/img_margin">
+        android:background="@color/colorAccent"
+        android:padding="@dimen/img_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/name"
@@ -38,15 +41,17 @@
             android:layout_height="wrap_content"
             style="@android:style/TextAppearance.DeviceDefault.Large"
             android:text="@string/prompt_user"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@android:style/TextAppearance"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
             android:text="@string/prompt_user"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textAlignment="center"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
-            android:imeActionId="@+id/login"
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"

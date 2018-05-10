@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_user"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:padding="@dimen/user_margin"
 
     android:background="@drawable/list_selector_2">
 

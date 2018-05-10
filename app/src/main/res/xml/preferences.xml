@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
    <PreferenceCategory android:title="General">
 
-   <EditTextPreference android:key="user"
-       android:title="User"
-       android:summary="your user"
-       android:singleLine="true"
-       />
+      <ListPreference
+          android:key="theme"
+          android:title="@string/select_theme"
+          android:dialogTitle="@string/select_theme"
+          android:summary="tema"
+          android:entries="@array/theme"
+          android:entryValues="@array/themeValues"
+          android:defaultValue="1"
+         />
+
+   </PreferenceCategory>
+   <PreferenceCategory android:title="Sonido">
+      <SwitchPreference
+          android:key="check_editar_audio"
+          android:title="Editar audio"
+          android:summary="cambiar velocidad y tono del audio de frases"
+          android:defaultValue="false"/>
+
+       <SeekBarPreference
+           android:key="seekBar_velocidad"
+           android:defaultValue="9"
+           android:title="@string/velocidad_audio"
+           android:dependency="check_editar_audio"
+           android:max="18"
+
+          />
+       <SeekBarPreference
+           android:key="seekBar_tono"
+           android:defaultValue="9"
+           android:title="@string/tono_audio"
+           android:dependency="check_editar_audio"
+           android:max="18"
+
+           />
+
    </PreferenceCategory>
 </PreferenceScreen>

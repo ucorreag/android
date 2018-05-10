@@ -3,7 +3,8 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorPrimaryLight">#64B5F6</color>
-    <color name="colorAccent">#009688</color>
+    <!--color name="colorAccent">#009688</color-->
+    <color name="colorAccent">#448AFF</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#727272</color>
     <color name="colorIcons">#FFFFFF</color>
@@ -11,6 +12,24 @@
     <color name="blueGrey">#ECEFF1</color>
     <color name="background">#FFF</color>
     <color name="colorError">#A00000</color>
+
+    <color name="darkColorPrimary">#111</color>
+    <color name="darkColorAccent">#777</color>
+    <color name="darkColorPrimaryDark">#000</color>
+    <color name="darkColorPrimaryText">#eee</color>
+
+    <color name="md_grey_50">#fafafa</color>
+    <color name="md_grey_100">#f5f5f5</color>
+    <color name="md_grey_200">#eeeeee</color>
+    <color name="md_grey_300">#e0e0e0</color>
+    <color name="md_grey_350">#d0d0d0</color>
+    <color name="md_grey_400">#bdbdbd</color>
+    <color name="md_grey_500">#9e9e9e</color>
+    <color name="md_grey_600">#757575</color>
+    <color name="md_grey_700">#616161</color>
+    <color name="md_grey_800">#424242</color>
+    <color name="md_grey_900">#212121</color>
+
 
 
 </resources>

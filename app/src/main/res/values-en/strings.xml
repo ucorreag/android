@@ -16,7 +16,7 @@
     <string name="statistics">Statistics</string>
 
 
-    <string name="help">Help</string>
+    <string name="info">Information</string>
     <string name="configuration">Configuration</string>
     <string name="lang">Selecting language</string>
     <string name="slogan">Let\'s learn more languages to speak a common tongue</string>
@@ -29,5 +29,53 @@
         <item>Portuguese</item>
     </string-array>
 
+    <string name="left">left</string>
+    <string name="right">right</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_user">Your user &#8230;</string>
+    <string name="prompt_password">Your password &#8230;</string>
+    <string name="prompt_repeat_password">Repeat your password &#8230;</string>
+    <string name="prompt_name">Your name &#8230;</string>
+
+
+
+    <string name="log_user">New Log of User</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_user">This user is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="home">Statistics</string>
+    <string name="logout">Logout</string>
+    <string name="delete_user">Removing user account</string>
+
+
+    //
+    <string name="statics">Statistics of App</string>
+    <string name="months">Months</string>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+
+    </string-array>
+    <string name="hours">Hours</string>
 
 </resources>

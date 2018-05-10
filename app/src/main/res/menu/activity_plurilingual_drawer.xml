@@ -11,22 +11,41 @@
         <menu>
             <group android:checkableBehavior="single">
             <item
-                android:id="@+id/nav_level_one"
+                android:id="@+id/nav_level_A1"
                 android:icon="@drawable/ic_menu_level"
-                android:title="@string/level_one" />
+                android:title="@string/level_a1" />
+                <item
+                    android:id="@+id/nav_level_A2"
+                    android:icon="@drawable/ic_menu_level"
+                    android:title="@string/level_a2" />
+                <item
+                    android:id="@+id/nav_level_B1"
+                    android:icon="@drawable/ic_menu_level"
+                    android:title="@string/level_b1" />
+                <item
+                    android:id="@+id/nav_level_B2"
+                    android:icon="@drawable/ic_menu_level"
+                    android:title="@string/level_b2" />
             </group>
         </menu>
     </item>
 
-     <item
-       android:id="@+id/nav_config"
-       android:icon="@drawable/ic_menu_manage"
-       android:title="@string/configuration" />
-     <item
-       android:id="@+id/nav_help"
-       android:icon="@drawable/ic_help"
-       android:title="@string/help" />
+    <item android:title="General" android:menuCategory="system" >
+        <menu>
+             <item
+               android:id="@+id/nav_config"
+               android:icon="@drawable/ic_menu_manage"
+               android:title="@string/configuration" />
+            <item
+                android:id="@+id/nav_shared"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/shared" />
+             <item
+               android:id="@+id/nav_info"
+               android:icon="@drawable/ic_info"
+               android:title="@string/info" />
+        </menu>
 
-
+    </item>
 
 </menu>

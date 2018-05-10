@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "www.integratedlanguages"
+        applicationId "cu.integratedlanguages"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //multiDexEnabled true
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -21,15 +21,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
     //androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     //   exclude group: 'com.android.support', module: 'support-annotations'
     //})
     //testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
-    compile project(':jplot')
-    androidTestCompile files('libs/junit-4.12.jar')
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    //androidTestCompile files('libs/junit-4.12.jar')
+    //compile files('libs/volley.jar')
+    api files('libs/volley.jar')
 
+    implementation files('libs/mpandroidchart.jar')
 }

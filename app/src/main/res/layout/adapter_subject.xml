@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,32 +35,77 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginRight="2dip"
         android:layout_marginLeft="2dip"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:id="@+id/hide_btn"
+        android:paddingTop="@dimen/subject"
+        android:paddingBottom="@dimen/subject"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
         android:visibility="gone"
-        android:background="@color/colorDivider"
-        android:gravity="center_horizontal">
-        <ImageButton
-            android:layout_width="wrap_content"
+        android:id="@+id/hide_btn"
+        android:background="@color/colorDivider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sentences"
             android:id="@+id/sentences"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_sentence"/>
-        <ImageButton
-            android:layout_width="wrap_content"
+            android:padding="4dip"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/sentences"
+                android:clickable="false"
+                android:src="@drawable/ic_action_sentence"
+                android:text="@string/sentences"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:layout_height="match_parent"
+                android:text="@string/sentences"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/exercises"
             android:id="@+id/exercise"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_ex"
+            android:padding="4dip"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:text="@string/exercises"
+                android:clickable="false"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/exercises"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_action_ex"
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:text="@string/exercises"
+                style="@style/TextAppearance.AppCompat.Medium"
             />
+
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

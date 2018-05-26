@@ -64,7 +64,13 @@ public class FragmentTypeTwo extends Fragment {
                 Images images= new Images();
                 Cursor sentence1= db.getSentenceById(ex.getString(ex.getColumnIndex("question")));
                 if(sentence1.moveToFirst()){
-                    String lang=db.getLanguageById(sentence1.getInt(sentence1.getColumnIndex("id_language"))+"");
+                    String lang="ES";
+                            Cursor language=db.getLanguageById(sentence1.getInt(
+                            sentence1.getColumnIndex("id_language"))+"");
+                            if(language.moveToFirst()){
+                                lang=language.getString(2);
+                            }
+
 
                     //
                     Drawable dwq=images.getImgLang(view.getContext(),lang);
@@ -77,8 +83,13 @@ public class FragmentTypeTwo extends Fragment {
 
                  if(sentence2.moveToFirst()){
                      answers=sentence2.getString(sentence2.getColumnIndex("caption_sentence"));
+                    String lang1="ES";
+                     Cursor k=db.getLanguageById(sentence2.getInt(
+                             sentence2.getColumnIndex("id_language"))+"");
+                     if(k.moveToFirst()){
+                         lang1=k.getString(2);
+                     }
 
-                     String lang1=db.getLanguageById(sentence2.getInt(sentence2.getColumnIndex("id_language"))+"");
 
                      Drawable dwa= images.getImgLang(view.getContext(),lang1);
                      imgLangAnswer.setImageDrawable(dwa);

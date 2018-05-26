@@ -3,19 +3,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_users"
-    android:layout_margin="@dimen/activity_horizontal_margin"
-    android:padding="@dimen/activity_horizontal_margin">
+    >
 
-
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_users"
-        android:dividerHeight="@dimen/activity_vertical_margin"
-        android:divider="@android:color/transparent"
-        android:listSelector="@color/colorAccent">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_users"
+                android:dividerHeight="@dimen/activity_vertical_margin"
+                android:divider="@android:color/transparent"
+                android:listSelector="@color/colorAccent">
 
-    </ListView>
+            </ListView>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
 
 
 </LinearLayout>

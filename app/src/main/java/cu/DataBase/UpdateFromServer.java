@@ -1,6 +1,8 @@
 package cu.DataBase;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -11,9 +13,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UpdateFromServer {
-    private static final String SERVER_URL="http://10.26.22.224/";
+    private static final String SERVER_URL="https://ucorreag1.000webhostapp.com/";
+    private Context context;
+    private ConnectionDB db;
 
-    public void updateLanguage(final Context context){
+    public UpdateFromServer(Context context, ConnectionDB db) {
+        this.db=db;
+        this.context = context;
+    }
+
+    public void updateLanguage(){
         Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -26,7 +35,6 @@ public class UpdateFromServer {
                             int id= data.getInt("id");
                             String caption= data.getString("caption_language");
                             String iso = data.getString("iso");
-                            ConnectionDB db= new ConnectionDB(context);
                             db.addLanguage(id,caption,iso);
 
                         }
@@ -48,7 +56,7 @@ public class UpdateFromServer {
 
     }
 
-    public void updateLevel(final Context context){
+    public void updateLevel(){
         Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -60,8 +68,8 @@ public class UpdateFromServer {
                             JSONObject data=jsonResponse.getJSONObject(i+"");
                             int id= data.getInt("id");
                             String caption= data.getString("caption_level");
-                            ConnectionDB db= new ConnectionDB(context);
                             db.addLevel(id,caption);
+
 
                         }
 
@@ -81,7 +89,7 @@ public class UpdateFromServer {
         queue.add(update);
     }
 
-    public void updateSubject(final Context context){
+    public void updateSubject(){
         Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -93,8 +101,8 @@ public class UpdateFromServer {
                             JSONObject data=jsonResponse.getJSONObject(i+"");
                             int id= data.getInt("id");
                             int idLevel= data.getInt("id_level");
-                            ConnectionDB db= new ConnectionDB(context);
                             db.addSubject(id,idLevel);
+
 
                         }
 
@@ -114,7 +122,7 @@ public class UpdateFromServer {
         queue.add(update);
     }
 
-    public void updateSubjectLanguage(final Context context){
+    public void updateSubjectLanguage(){
         Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -129,9 +137,8 @@ public class UpdateFromServer {
                             int idSubject= data.getInt("id_subject");
                             int idLanguage= data.getInt("id_language");
                             String caption= data.getString("caption_subject");
-
-                            ConnectionDB db= new ConnectionDB(context);
                             db.addSubjectLanguage(id,idSubject, idLanguage,caption);
+
 
 
                         }
@@ -152,7 +159,7 @@ public class UpdateFromServer {
         queue.add(update);
     }
 
-    public void updateSentence(final Context context){
+    public void updateSentence(){
         Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -168,9 +175,8 @@ public class UpdateFromServer {
                             int idLanguage= data.getInt("id_language");
                             int sequence= data.getInt("sequence");
                             String caption= data.getString("caption");
-
-                            ConnectionDB db= new ConnectionDB(context);
                             db.addSentence(id,idSubject, idLanguage,sequence,caption);
+
 
                         }
 
@@ -189,6 +195,166 @@ public class UpdateFromServer {
         RequestQueue queue= Volley.newRequestQueue(context);
         queue.add(update);
     }
+
+    public void updateExerciseFirstType(){
+        Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse=new JSONObject(response);
+                    boolean success= jsonResponse.getBoolean("success");
+                    if(success){
+                        for(int i=0; i<(jsonResponse.length()-1); i++ ){
+                            JSONObject data=jsonResponse.getJSONObject(i+"");
+                            ContentValues newData= new ContentValues();
+                            newData.put("id", data.getInt("id"));
+                            newData.put("id_subject", data.getInt("id_subject"));
+                            newData.put("type", data.getInt("type"));
+                            newData.put("order_exercise",data.getInt("order_exercise"));
+                            newData.put("question",data.getString("question"));
+                            newData.put("option1", data.getInt("option1"));
+                            newData.put("option2", data.getInt("option2"));
+                            newData.put("option3", data.getInt("option3"));
+                            newData.put("option4",data.getInt("option4"));
+                            newData.put("option5",data.getString("option5"));
+                            newData.put("answer",data.getInt("answer"));
+
+                            db.addExerciseTypeOne(newData);
+
+
+                        }
+
+                    }else{
+                        Toast.makeText(context,"data no found",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(context,"error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        Listener update= new Listener(SERVER_URL+"getExerciseTypeOne.php",responseListenLanguage);
+        RequestQueue queue= Volley.newRequestQueue(context);
+        queue.add(update);
+    }
+
+    public void updateExerciseSecondType(){
+        Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse=new JSONObject(response);
+                    boolean success= jsonResponse.getBoolean("success");
+                    if(success){
+                        for(int i=0; i<(jsonResponse.length()-1); i++ ){
+                            JSONObject data=jsonResponse.getJSONObject(i+"");
+                            ContentValues newData = new ContentValues();
+                            newData.put("id", data.getInt("id"));
+                            newData.put("id_subject", data.getInt("id_subject"));
+                            newData.put("type", data.getInt("type"));
+                            newData.put("order_exercise",data.getInt("order_exercise"));
+                            newData.put("question",data.getInt("question"));
+                            newData.put("answer",data.getInt("answer"));
+                            db.addExerciseTypeTwo(newData);
+
+
+                        }
+
+                    }else{
+                        Toast.makeText(context,"data no found",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(context,"error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        Listener update= new Listener(SERVER_URL+"getExerciseTypeTwo.php",responseListenLanguage);
+        RequestQueue queue= Volley.newRequestQueue(context);
+        queue.add(update);
+    }
+
+    public void updateExerciseThirdType(){
+        Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse=new JSONObject(response);
+                    boolean success= jsonResponse.getBoolean("success");
+                    if(success){
+                        for(int i=0; i<(jsonResponse.length()-1); i++ ){
+                            JSONObject data=jsonResponse.getJSONObject(i+"");
+                            ContentValues newData = new ContentValues();
+                            newData.put("id", data.getInt("id"));
+                            newData.put("id_subject", data.getInt("id_subject"));
+                            newData.put("type", data.getInt("type"));
+                            newData.put("order_exercise",data.getInt("order_exercise"));
+                            newData.put("introduction",data.getString("introduction"));
+                            newData.put("question",data.getInt("question"));
+                            db.addExerciseTypeThree(newData);
+
+
+                        }
+
+                    }else{
+                        Toast.makeText(context,"data no found",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(context,"error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        Listener update= new Listener(SERVER_URL+"getExerciseTypeThree.php",responseListenLanguage);
+        RequestQueue queue= Volley.newRequestQueue(context);
+        queue.add(update);
+    }
+
+    public void updateExerciseFourthType(){
+
+        Response.Listener<String> responseListenLanguage= new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse=new JSONObject(response);
+                    boolean success= jsonResponse.getBoolean("success");
+                    if(success){
+                        for(int i=0; i<(jsonResponse.length()-1); i++ ){
+                            JSONObject data=jsonResponse.getJSONObject(i+"");
+                            ContentValues newData = new ContentValues();
+                            newData.put("id", data.getInt("id"));
+                            newData.put("id_subject", data.getInt("id_subject"));
+                            newData.put("type", data.getInt("type"));
+                            newData.put("order_exercise",data.getInt("order_exercise"));
+                            newData.put("question",data.getInt("question"));
+                            db.addExerciseTypeFour(newData);
+
+
+                        }
+
+                    }else{
+                        Toast.makeText(context,"data no found",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(context,"error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        Listener update= new Listener(SERVER_URL+"getExerciseTypeFour.php",responseListenLanguage);
+        RequestQueue queue= Volley.newRequestQueue(context);
+        queue.add(update);
+    }
+
+
 
 
 }

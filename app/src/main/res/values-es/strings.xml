@@ -44,13 +44,13 @@
     //
 
 
-    <string name="left">left</string>
-    <string name="right">right</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="left">izquierdo</string>
+    <string name="right">derecha</string>
+    <string name="title_activity_login">Iniciar sesión</string>
 
     <!-- Strings related to login -->
     <string name="prompt_user">usuario &#8230;</string>
-    <string name="prompt_password">constraseña &#8230;</string>
+    <string name="prompt_password">contraseña …</string>
     <string name="prompt_repeat_password">repetir contraseña &#8230;</string>
     <string name="prompt_name">nombre &#8230;</string>
 
@@ -62,9 +62,9 @@
     <string name="action_sign_in">Entrar</string>
     <string name="action_register">Registrar</string>
     <string name="action_sign_in_short">Entrar</string>
-    <string name="error_invalid_user">usuario invalido</string>
-    <string name="error_invalid_password">contraseña pequeña</string>
-    <string name="error_incorrect_password">contraseña inválida</string>
+
+    <string name="error_invalid_password">Contraseña pequeña</string>
+    <string name="error_incorrect_password">Contraseña inválida</string>
     <string name="error_field_required">Es requerido</string>
     <string name="permission_rationale">"correo no permitido"</string>
 
@@ -75,7 +75,7 @@
 
 
     //
-    <string name="statics">Estadisticas de uso de app </string>
+    <string name="statics">Estadísticas de uso de app</string>
     <string name="months">Meses</string>
     <string-array name="months">
         <item>Enero</item>
@@ -105,8 +105,7 @@
 
     <string name="hours">Horas</string>
 
-    <string name="app_back_pressed_exit">vuelva a precionar para salir</string>
-    <string name="title_activity_exercise_type_one">ExerciseTypeOne</string>
+    <string name="app_back_pressed_exit">vuelva a presionar para salir</string>
 
     //
     <string name="info_translate">Traducir la siguiente frase:</string>
@@ -130,5 +129,19 @@
 
     <string name="velocidad_audio">Velocidad de audio</string>
     <string name="tono_audio">Tono de audio</string>
+    <string name="year">Año</string>
+    <string name="answer">Respuesta</string>
+    <string name="answer_bad">Ups fallaste, la respuesta es:</string>
+    <string name="answer_ok">Felicidades. Respondiste bien</string>
+    <string name="day">Día</string>
+    <string name="description_evaluation">Resultados de evaluación</string>
+    <string name="entries_statics_app">Cantidad de minutos de uso diario</string>
+    <string name="week_now">Semana actual</string>
+    <string name="week">Semana</string>
+    <string name="title_statics_app">Estadísticas de Uso del App</string>
+    <string name="title_evaluation">Estadísticas de Evaluación</string>
+    <string name="next">Siguiente</string>
+    <string name="notification_1">Se recomienda estudiar el tema:</string>
+    <string name="notification_2">Es necesario estudiar el tema:</string>
 
 </resources>

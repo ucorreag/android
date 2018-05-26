@@ -26,14 +26,17 @@ import cu.Utile.Images;
 import static android.content.Context.MODE_PRIVATE;
 
 
-class AdapterSentences extends ArrayAdapter<Sentence> implements
-        TextToSpeech.OnInitListener {
+class AdapterSentences extends ArrayAdapter<Sentence>{
 
 
     private TextToSpeech tts;
+    private String locale;
+    private LinearLayout layout;
+    private TextView lang;
 
-    AdapterSentences(@NonNull Context context, ArrayList<Sentence> sentences) {
+    AdapterSentences(@NonNull Context context, ArrayList<Sentence> sentences, TextToSpeech tts) {
         super(context,0, sentences);
+        this.tts=tts;
     }
 
     @NonNull
@@ -44,37 +47,35 @@ class AdapterSentences extends ArrayAdapter<Sentence> implements
 
         TextView txtSentence=(TextView)convertView.findViewById(R.id.txt_sentences);
         ImageView img=(ImageView)convertView.findViewById(R.id.img_lang);
-        TextView lang=(TextView)convertView.findViewById(R.id.txt_lang);
-        final LinearLayout layout=(LinearLayout)convertView.findViewById(R.id.adapter_sentences);
+        lang=(TextView)convertView.findViewById(R.id.txt_lang);
+        layout=(LinearLayout)convertView.findViewById(R.id.adapter_sentences);
 
 
         final Sentence sentence = getItem(position);
 
-        tts=new TextToSpeech(getContext(),this);
+        //tts=new TextToSpeech(getContext(),this);
 
         assert sentence != null;
         txtSentence.setText(sentence.getSentence());
 
-
-
-        String locale=sentence.getLanguage();
+        locale=sentence.getLanguage();
         lang.setText(locale);
         Images images= new Images();
         Drawable image= images.getImgLang(this.getContext(),locale);
         img.setImageDrawable(image);
 
 
-
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!tts.isSpeaking()){
-                    Locale loc=new Locale(sentence.getLanguage().toLowerCase());
-                    int result=TextToSpeech.SUCCESS;
-                    if(!loc.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage())) {
-                        result = tts.setLanguage(loc);
-                    }
+                    //Locale loc=new Locale(sentence.getLanguage().toLowerCase());
+                    //int result=TextToSpeech.SUCCESS;
+                    //if(!loc.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage())) {
+                     //   result = tts.setLanguage(loc);
+                    //}
 
+                    int result=tts.setLanguage(new Locale(sentence.getLanguage()));
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED){
                         Toast.makeText(getContext(),"Listener not supported",Toast.LENGTH_SHORT).show();
@@ -116,11 +117,13 @@ class AdapterSentences extends ArrayAdapter<Sentence> implements
     }
 
 
-
+/**
     @Override
     public void onInit(int status) {
-
+            tts.stop();
     }
+*/
+
 
 
 

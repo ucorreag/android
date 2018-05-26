@@ -71,7 +71,13 @@ public class FragmentTypeFour extends Fragment implements TextToSpeech.OnInitLis
                 //option sentence
                 Cursor sentence1 = db.getSentenceById(ex.getString(ex.getColumnIndex("question")));
                 if (sentence1.moveToFirst()) {
-                    lang=db.getLanguageById(sentence1.getInt(sentence1.getColumnIndex("id_language"))+"");
+                    Cursor k=db.getLanguageById(sentence1.getInt(
+                            sentence1.getColumnIndex("id_language"))+"");
+                    lang="ES";
+                    if(k.moveToFirst()){
+                        lang=k.getString(2);
+                    }
+
                     Images images=new Images();
                     Drawable dwq=images.getImgLang(view.getContext(),lang);
                     imgLang.setImageDrawable(dwq);
@@ -85,10 +91,13 @@ public class FragmentTypeFour extends Fragment implements TextToSpeech.OnInitLis
 
             }
 
+
+
             listen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    speech(answers);
+                    int status=tts.setLanguage(new Locale(lang));
+                    speech(answers, status);
                 }
             });
 
@@ -129,12 +138,23 @@ public class FragmentTypeFour extends Fragment implements TextToSpeech.OnInitLis
         }
 
 
-
-                return view;
+        return view;
     }
 
-    public void speech( String txt){
+    public void speech( String txt, int status){
+        if ( status == TextToSpeech.LANG_MISSING_DATA | status == TextToSpeech.LANG_NOT_SUPPORTED )
+        {
+            Toast.makeText( context, "ERROR LANG_MISSING_DATA | LANG_NOT_SUPPORTED",
+                    Toast.LENGTH_SHORT ).show();
+            Intent install=new Intent();
+            install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+            context.startActivity(install);
+        }else {
+
             tts.speak(txt, TextToSpeech.QUEUE_FLUSH, null);
+            tts.setSpeechRate(0.0f);
+            tts.setPitch(0.0f);
+        }
 
     }
 
@@ -185,29 +205,21 @@ public class FragmentTypeFour extends Fragment implements TextToSpeech.OnInitLis
 
     @Override
     public void onInit(int status) {
-        Locale loc=new Locale(lang.trim());
 
-        int result=TextToSpeech.SUCCESS;
-        if(!loc.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage())) {
-            result = tts.setLanguage(loc);
-        }
 
-        if (result == TextToSpeech.LANG_MISSING_DATA
-                || result == TextToSpeech.LANG_NOT_SUPPORTED){
-            Toast.makeText(context,"Language not supported",Toast.LENGTH_SHORT).show();
-            Intent install=new Intent();
-            install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-            context.startActivity(install);
+    }
 
-        }else{
-            speech(answers);
-        }
+    @Override
+    public void onStop() {
+        tts.stop();
+        super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        tts.stop();
         tts.shutdown();
+        super.onDestroy();
+
+
     }
 }

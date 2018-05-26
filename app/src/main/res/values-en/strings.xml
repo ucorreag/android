@@ -12,14 +12,14 @@
     <string name="sentences">Sentences</string>
     <string name="exercises">Exercises</string>
     <string name="level">Learning level</string>
-    <string name="level_one">First Level</string>
+
     <string name="statistics">Statistics</string>
 
 
     <string name="info">Information</string>
     <string name="configuration">Configuration</string>
     <string name="lang">Selecting language</string>
-    <string name="slogan">Let\'s learn more languages to speak a common tongue</string>
+    <string name="slogan">Let us study more languages ​​to speak a common language.</string>
 
     <string-array name="language">
         <item>Spanish</item>
@@ -45,13 +45,10 @@
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_user">This user is invalid</string>
+
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
     <string name="home">Statistics</string>
     <string name="logout">Logout</string>
@@ -59,7 +56,7 @@
 
 
     //
-    <string name="statics">Statistics of App</string>
+    <string name="statics">App usage statistics</string>
     <string name="months">Months</string>
     <string-array name="months">
         <item>January</item>
@@ -77,5 +74,41 @@
 
     </string-array>
     <string name="hours">Hours</string>
+    <string name="year">Year</string>
+    <string name="answer">Answer</string>
+    <string name="answer_bad">Ups failed, the answer is:</string>
+    <string name="answer_ok">Congratulations, answer ok</string>
+    <string name="app_back_pressed_exit">press again to exit</string>
+    <string name="author">Author</string>
+    <string name="day">Day</string>
+    <string name="delete">Delete</string>
+    <string name="description_evaluation">Results of evaluation</string>
+    <string name="entries_statics_app">Quantity of minutes of daily use</string>
+    <string name="help">Help</string>
+    <string name="info_complete">Sorting the following sentence:</string>
+    <string name="info_listen">Listener and writes the sentence:</string>
+    <string name="info_translate">Translating the following sentence:</string>
+    <string name="level_a1">Access(A1)</string>
+    <string name="level_a2">Platform(A2)</string>
+    <string name="level_b1">Threshold(B1)</string>
+    <string name="level_b2">Advanced(B2)</string>
+    <string name="next">Next</string>
+    <string name="ok">Ok</string>
+    <string name="out">Out</string>
+    <string name="week">Week</string>
+    <string name="users">Users</string>
+    <string name="version">Version</string>
+    <string name="register">Save</string>
+    <string name="shared">Sharing app</string>
+    <string name="title_activity_exercise">Exercises</string>
+    <string name="notification_1">It is recommended to study the subject:</string>
+    <string name="notification_2">It is necessary to study the subject:</string>
+    <string name="permission_rationale">mail not allowed</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="title_evaluation">Evaluation Statistics</string>
+    <string name="title_statics_app">App Use Statistics</string>
+    <string name="tono_audio">Audio tone</string>
+    <string name="velocidad_audio">Audio speed</string>
+    <string name="week_now">Current week</string>
 
 </resources>

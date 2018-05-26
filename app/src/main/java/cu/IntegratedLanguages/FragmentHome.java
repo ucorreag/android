@@ -1,9 +1,9 @@
 package cu.IntegratedLanguages;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -34,6 +36,7 @@ public class FragmentHome extends Fragment {
     private String year;
     private PieChart pieChart;
     private LineChart lineChart;
+    private LinearLayout layoutNotifications;
 
     @Nullable
     @Override
@@ -44,6 +47,7 @@ public class FragmentHome extends Fragment {
         db=new ConnectionDB(view.getContext());
         pieChart = (PieChart) view.findViewById(R.id.pieChart);
         lineChart = (LineChart) view.findViewById(R.id.lineChart);
+        layoutNotifications=(LinearLayout)view.findViewById(R.id.notifications);
 
         ImageButton left=(ImageButton)view.findViewById(R.id.btn_prev);
         Button now=(Button)view.findViewById(R.id.btn_now);
@@ -80,6 +84,9 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        //notifications
+        notifications(view.getContext());
+        //statics
         staticsApp(lineChart,week,year);
         staticsEvaluation(pieChart);
 
@@ -231,6 +238,38 @@ return entries;
 
         }
 
+    }
+
+    public void notifications(Context context){
+
+        ArrayList<String[]> notify=db.getSugerencias(
+                getResources().getConfiguration().locale.getLanguage().toUpperCase());
+        for (String[] sug:notify
+                ) {
+            if(sug[0].trim().equals("1")) {
+                TextView tx = new TextView(context);
+                tx.setTextColor(Color.WHITE);
+                tx.setText(getResources().getString(R.string.notification_1)+" "+sug[1]);
+                tx.setBackground(getResources().getDrawable(R.drawable.notification_2));
+                layoutNotifications.addView(tx, ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+            }
+
+            else if(sug[0].trim().equals("2")) {
+                TextView tx = new TextView(context);
+                tx.setText(getResources().getString(R.string.notification_2)+" "+sug[1]);
+                tx.setTextColor(Color.WHITE);
+                tx.setBackground(getResources().getDrawable(R.drawable.notification_1));
+                layoutNotifications.addView(tx, ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+
+            }
+
+        }
     }
 
     @Override

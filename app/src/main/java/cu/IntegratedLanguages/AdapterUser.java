@@ -76,13 +76,14 @@ class AdapterUser extends ArrayAdapter<User> {
 
                 menu.setHeaderTitle(getContext().getString(R.string.delete));
                 //groupId, itemId, order, title
-                item1 = menu.add(0, v.getId(), 0, "Deleting " + user.getUser() + "?");
+                item1 = menu.add(0, v.getId(), 0, "Eliminar " + user.getUser());
                 item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (db.deleteUser(user.getUser()) != -1) {
-                            Toast.makeText(getContext(), user.getUser() + " deleted", Toast.LENGTH_SHORT).show();
-                            ((Activity) getContext()).getFragmentManager().beginTransaction().replace(R.id.content_login, new FragmentBaseTabs()).commit();
+                            Toast.makeText(getContext(), user.getUser() + " eliminado", Toast.LENGTH_SHORT).show();
+                            ((Activity) getContext()).getFragmentManager().beginTransaction()
+                                    .replace(R.id.content_login, new FragmentBaseTabs()).commit();
 
                         }
                         return true;

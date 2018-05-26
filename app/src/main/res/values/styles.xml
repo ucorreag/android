@@ -36,6 +36,18 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/md_grey_350</item>
     </style>
+
+    <style name="notification" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:paddingTop">2dip</item>
+        <item name="android:paddingBottom">2dip</item>
+        <item name="android:paddingLeft">2dip</item>
+        <item name="android:paddingRight">2dip</item>
+        <item name="android:layout_marginTop">8dip</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorError</item>
+    </style>
+
     <style name="layout_three" parent="android:Theme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

@@ -74,8 +74,12 @@ public class FragmentTypeThree extends Fragment {
 
                 Cursor sentence1 = db.getSentenceById(ex.getString(ex.getColumnIndex("question")));
                 if (sentence1.moveToFirst()) {
-
-                    String lang = db.getLanguageById(sentence1.getInt(sentence1.getColumnIndex("id_language")) + "");
+                    String lang="ES";
+                    Cursor k = db.getLanguageById(sentence1.getInt(sentence1.
+                            getColumnIndex("id_language")) + "");
+                    if(k.moveToFirst()){
+                        lang=k.getString(2);
+                    }
 
                     Images images = new Images();
                     Drawable dwq = images.getImgLang(view.getContext(), lang);

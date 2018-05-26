@@ -21,6 +21,7 @@ public class SelectLanguageApp extends AppCompatDialogFragment {
 
     private DialogFragmentListener listener;
     private int selected;
+    private String[] lang;
 
     public static SelectLanguageApp newInstance(Integer selection, String[] items, String title) {
         SelectLanguageApp fragment = new SelectLanguageApp();
@@ -58,12 +59,13 @@ public class SelectLanguageApp extends AppCompatDialogFragment {
             selected = getArguments().getInt(ARG_SELECTED, UNSELECTED);
         }
 
-        final String[] lang = getArguments().getStringArray(ARG_ITEMS);
+        lang = getArguments().getStringArray(ARG_ITEMS);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder.setTitle(getArguments().getString(ARG_TITLE))
-                .setSingleChoiceItems(lang, selected, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(lang, selected,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selected = which;

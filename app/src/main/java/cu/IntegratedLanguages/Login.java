@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
 import cu.DataBase.UpdateFromServer;
 
 import cu.DataBase.ConnectionDB;
 
 public class Login extends AppCompatActivity {
-
+    private ConnectionDB db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,25 +20,20 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db=new ConnectionDB(this);
+
+        //update database
+        update();
 
 
 
-
-        ConnectionDB db=new ConnectionDB(this);
-
-        UpdateFromServer update= new UpdateFromServer();
-        update.updateLanguage(this);
-        update.updateLevel(this);
-        update.updateSubject(this);
-        update.updateSubjectLanguage(this);
-        update.updateSentence(this);
 
         if(db.isUserLoged()){
             startActivity( new Intent(this, Plurilingual.class));
             this.finishAffinity();
         }
 
-        setTitle("Login");
+        setTitle("Iniciar sesión");
 
 
 
@@ -49,5 +46,22 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public void update(){
+        UpdateFromServer update= new UpdateFromServer(this, db);
+        update.updateLanguage();
+        update.updateLevel();
+        update.updateSubject();
+        update.updateSubjectLanguage();
+        update.updateSentence();
+        update.updateExerciseFirstType();
+        update.updateExerciseSecondType();
+        update.updateExerciseThirdType();
+        update.updateExerciseFourthType();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 }

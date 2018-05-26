@@ -1,2 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Approche plurilingue</string>
+    <string name="title_activity_preferences">Configuration de préférences</string>
+    <string name="title_activity_sentences">" Phrases"</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_register">Inscrire</string>
+    <string name="action_settings">Configuration</string>
+    <string name="action_sign_in">Entrer</string>
+    <string name="action_sign_in_short">Entrer</string>
+    <string name="answer">Réponse</string>
+    <string name="answer_bad">Ups as manqué, la réponse est:</string>
+    <string name="answer_ok">Félicitations Vous avez bien répondu</string>
+    <string name="app_back_pressed_exit">appuyez à nouveau pour quitter</string>
+    <string name="author">Auteur</string>
+    <string name="configuration">Configuration</string>
+    <string name="day">Jour</string>
+    <string name="delete">Éliminer</string>
+    <string name="delete_user">Enlever compte d\'usager</string>
+    <string name="description_evaluation">Résultats d\'évaluation</string>
+    <string name="entries_statics_app">Quantité de minutes d\'utilisation journalière</string>
+    <string name="error_field_required">Est requis</string>
+    <string name="error_incorrect_password">Mot de passe invalide</string>
+    <string name="error_invalid_password">Marque très courte</string>
+    <string name="exercises">Exercices</string>
+    <string name="help">Aide</string>
+    <string name="home">Statistiques</string>
+    <string name="hours">Heures</string>
+    <string name="info">Information</string>
+    <string name="info_complete">Trier le jugement suivant:</string>
+    <string name="info_listen">Écoute et écrit la phrase:</string>
+    <string name="info_translate">Traduire le jugement suivant:</string>
+    <string name="lang">Choisir langue</string>
+    <string name="left">gauche</string>
+    <string name="level">Niveau d\'apprentissage</string>
+    <string name="logout">Logout</string>
+    <string name="level_a1">Accès(A1)</string>
+    <string name="level_a2">Plate-forme(A2)</string>
+    <string name="level_b1">Seuil(B1)</string>
+    <string name="level_b2">Avancé(B2)</string>
+    <string name="log_user">Grosse bûche nouveau d\'usager</string>
+    <string name="months">Mois</string>
+    <string name="next">Prochain</string>
+    <string name="ok">Ok</string>
+    <string name="out">Omet</string>
+    <string name="register">Garder</string>
+    <string name="right">" droite"</string>
+    <string name="shared">App de part</string>
+    <string name="sentences">Phrases</string>
+    <string name="title_activity_exercise">Exercices</string>
+    <string name="statistics">Données statistiques</string>
+    <string name="notification_1">Il est recommandé d\'étudier le sujet:</string>
+    <string name="notification_2">Il est nécessaire d\'étudier le sujet:</string>
+    <string name="permission_rationale">courrier non autorisé</string>
+    <string name="prompt_name">nom ...</string>
+    <string name="prompt_password">passe ...</string>
+    <string name="prompt_repeat_password">Répéter le mot de passe ...</string>
+    <string name="prompt_user">utilisateur ...</string>
+    <string name="select_theme">Sélectionner un thème</string>
+    <string name="slogan">Laissez-nous étudier plus de langues pour parler une langue commune.</string>
+    <string name="statics">Statistiques d\'utilisation de l\'application</string>
+    <string name="title_activity_login">Se connecter</string>
+    <string name="title_evaluation">Statistiques d\'évaluation</string>
+    <string name="title_statics_app">Statistiques sur l\'utilisation des applications</string>
+    <string name="tono_audio">Tonalité audio</string>
+    <string name="users">Utilisateurs</string>
+    <string name="velocidad_audio">Vitesse audio</string>
+    <string name="version">Version</string>
+    <string name="week">Semaine</string>
+    <string name="week_now">Semaine en cours</string>
+    <string name="year">Année</string>
+
+
+</resources>

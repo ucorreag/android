@@ -1,8 +1,10 @@
 package cu.IntegratedLanguages;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -17,20 +19,23 @@ import java.util.ArrayList;
 import cu.DataBase.ConnectionDB;
 import cu.Plurilingual.Sentence;
 
-public class Sentences extends AppCompatActivity {
+public class Sentences extends AppCompatActivity implements
+        TextToSpeech.OnInitListener  {
     LinearLayout layout;
     ListView listSentences;
     ArrayList<Sentence> adapter;
     ConnectionDB cdb;
-
+    private Cursor sequence;
 
     Intent intent;
-    String idTema,sequence, value;
-    boolean move;
-    int start,end;
+    String idTema;
+    int start,end, value;
+    ImageButton btnLeft, btnRight;
+    private AdapterSentences ads;
+    private TextToSpeech tts;
 
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,21 +45,26 @@ public class Sentences extends AppCompatActivity {
 
         layout=(LinearLayout)findViewById(R.id.content_sentences);
         listSentences = (ListView) findViewById(R.id.list_sentences);
+        btnLeft=(ImageButton)findViewById(R.id.btn_left);
+        btnRight=(ImageButton)findViewById(R.id.btn_right);
+
         cdb=new ConnectionDB(this);
         intent=getIntent();
         idTema=intent.getStringExtra("id");
-
+        tts=new TextToSpeech(this,this);
         adapter=new ArrayList<>();
-        AdapterSentences ads=new AdapterSentences(this,adapter);
+        ads=new AdapterSentences(this,adapter, tts);
 
         listSentences.setAdapter(ads);
-        sequence=1+"";
 
-        addElementToList(sequence);
+        sequence=cdb.getSequence(idTema);
+        if(sequence.moveToFirst()){
+            addElementToList(sequence.getInt(0));
+        }
+        paintIconsMoves();
+
         start=0;
         end=0;
-        move = false;
-        value=1+"";
 
 
         listSentences.setOnTouchListener(new View.OnTouchListener(){
@@ -66,23 +76,18 @@ public class Sentences extends AppCompatActivity {
                 switch (event.getAction()) {
                     case (MotionEvent.ACTION_DOWN):
                         start = x;
+                        end = x;
                         break;
                     case (MotionEvent.ACTION_MOVE):
                         end = x;
-                        move = true;
                         break;
                     case (MotionEvent.ACTION_UP):
-                        if(move && (start - end)>100){
-                           value=(Integer.parseInt(sequence)+1)+"";
-                            addElementToList(value);
-
-                        }else if(move && (end - start)>100){
-                            value=(Integer.parseInt(sequence)-1)+"";
-                            addElementToList(value);
-
+                        if((start - end)>100 && sequence.moveToNext()){
+                           addElementToList(sequence.getInt(0));
+                        }else if((end - start)>100 && sequence.moveToPrevious()){
+                           addElementToList(sequence.getInt(0));
                         }
-
-                        move = false;
+                        paintIconsMoves();
                         break;
                 }
 
@@ -90,54 +95,58 @@ public class Sentences extends AppCompatActivity {
             }
         });
 
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sequence.moveToPrevious()) {
+                    addElementToList(sequence.getInt(0));
+                    paintIconsMoves();
+                }
+            }
+        });
+
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //value=(Integer.parseInt(sequence)+1)+"";
+                if(sequence.moveToNext()) {
+                    addElementToList(sequence.getInt(0));
+                    paintIconsMoves();
+                }
+            }
+        });
+
+
 
 
     }
 
 
 
-    private void addElementToList(String seq){
+    private void addElementToList(int seq){
         Cursor c;
         try{
-            c=cdb.getSentencesBySequence(idTema,seq);
+            c=cdb.getSentencesBySequence(idTema,seq+"");
             if (c!=null)adapter.clear();
 
             assert c != null;
             while (c.moveToNext()){
-                String lang=cdb.getLanguageById(c.getInt(c.getColumnIndex("id_language"))+"");
+                String lang="ES";
+                Cursor cursor=cdb.getLanguageById(c.getInt(
+                        c.getColumnIndex("id_language"))+"");
+                if(cursor.moveToFirst()){
+                    lang=cursor.getString(2);
+                }
                 Sentence cn=new Sentence(
-                        c.getInt(c.getColumnIndex("id")),lang ,
+                        c.getInt(0),//id
+                        lang ,
                         c.getString(c.getColumnIndex("caption_sentence"))
                 );
 
                 adapter.add(cn);
-                listSentences.setAdapter(new AdapterSentences(this,adapter));
-                sequence=seq;
 
-                //
-                int sequ=Integer.parseInt(seq);
-                Cursor left=cdb.getSentencesBySequence(idTema,(sequ-1)+"");
-                Cursor right=cdb.getSentencesBySequence(idTema,(sequ+1)+"");
-                ImageButton imgLeft=(ImageButton)this.findViewById(R.id.btn_left);
-                ImageButton imgRight=(ImageButton)this.findViewById(R.id.btn_right);
-
-
-                if(!left.moveToFirst() & !right.moveToFirst()){
-                    imgLeft.setImageDrawable(null);
-                    imgRight.setImageDrawable(null);
+                listSentences.setAdapter(new AdapterSentences(this,adapter,tts));
                 }
-                else if(!right.moveToFirst()){
-                    imgLeft.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_left));
-                    imgRight.setImageDrawable(null);
-                }else if(!left.moveToFirst()){
-                    imgRight.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_right));
-                    imgLeft.setImageDrawable(null);
-                }else{
-                    imgLeft.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_left));
-                    imgRight.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_right));
-                }
-
-            }
 
         }catch (NullPointerException e){
             Toast.makeText(getApplicationContext(),"Error DB: "+e.getMessage(),Toast.LENGTH_LONG).show();
@@ -157,6 +166,33 @@ public boolean onOptionsItemSelected(MenuItem item){
   return  true;
 }
 
+public void paintIconsMoves(){
+    if(sequence.moveToNext()){
+        btnRight.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_right));
+    }
+    else{
+        btnRight.setImageDrawable(null);
+    }
+    sequence.moveToPrevious();
 
+    if(!sequence.moveToPrevious()){
+        btnLeft.setImageDrawable(null);
+    }
+    else{
+        btnLeft.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_left));
 
+    }
+    sequence.moveToNext();
+}
+
+    @Override
+    protected void onDestroy() {
+        tts.shutdown();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onInit(int status) {
+
+    }
 }

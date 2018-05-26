@@ -12,9 +12,11 @@ import java.io.Console;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class ConnectionDB extends SQLiteOpenHelper {
@@ -46,7 +48,7 @@ public class ConnectionDB extends SQLiteOpenHelper {
         //create user
         db.execSQL("CREATE TABLE user (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "id_language INTEGER DEFAULT 2," +
+                "id_language INTEGER DEFAULT 1," +
                 "user TEXT, password TEXT, name TEXT," +
                 "last_date_open TEXT, last_date_close TEXT," +
                 "active INTEGER, log INTEGER, " +
@@ -69,7 +71,7 @@ public class ConnectionDB extends SQLiteOpenHelper {
                 "type INTEGER(1) DEFAULT 1,"+
                 "order_exercise INTEGER,"+
                 "question text, option1 INTEGER, option2 INTEGER,"+
-                " option3 INTEGER, option4 INTEGER, option5 INTEGER, answer INTEGER,"+
+                " option3 INTEGER, option4 INTEGER, option5 TEXT, answer INTEGER,"+
                 "CONSTRAINT id_subject FOREIGN KEY (id_subject) REFERENCES subject (id),"+
                 " CONSTRAINT option1 FOREIGN KEY (option1) REFERENCES sentence (id),"+
                 " CONSTRAINT option2 FOREIGN KEY (option2) REFERENCES sentence (id),"+
@@ -154,9 +156,13 @@ public class ConnectionDB extends SQLiteOpenHelper {
                 newEvaluation.put("type", all.getInt(all.getColumnIndex("type")));
 
                 db.insert("evaluation", null, newEvaluation);
+
+
             }
-            Log.e("entro",all.getString(1));
+
+
         }
+
 
     }
 
@@ -175,6 +181,7 @@ public class ConnectionDB extends SQLiteOpenHelper {
 
 
         }
+
         return -1;
     }
 
@@ -184,6 +191,7 @@ public class ConnectionDB extends SQLiteOpenHelper {
                 new String[]{id_user + "", evaluation+""},
                 null, null, null);
         return c.getCount();
+
     }
 
     public int getEvaluationSizeBySubject(int id_user, int id_subject, int evaluation){
@@ -192,7 +200,54 @@ public class ConnectionDB extends SQLiteOpenHelper {
                 new String[]{id_user + "",id_subject+"", evaluation+""},
                 null, null, null);
         return c.getCount();
+
     }
+
+    public ArrayList<String[]>  getSugerencias(String iso){
+        ArrayList<String[]> arr=new ArrayList<>();
+
+        int id_user=1;
+        Cursor user=getUserLog();
+        if(user.moveToFirst())id_user=user.getInt(0);
+        String all="select id_subject, count(id) as cantidad from evaluation " +
+                "where id_user LIKE ? GROUP BY id_subject";
+        Cursor c=getReadableDatabase().rawQuery(all,new String[]{id_user+""});
+
+        while (c.moveToNext()){
+            int id=c.getInt(c.getColumnIndex("id_subject"));
+            Cursor desap=getReadableDatabase().query(
+                    "evaluation",
+                    null,
+                    "id_subject LIKE ? AND id_user LIKE ? AND evaluation LIKE ?",
+                    new String[]{id+"",id_user+"",2+""},
+                    null,null,
+                    null);
+
+            Cursor k= getReadableDatabase().rawQuery("SELECT "+
+                            " subject_language.caption_subject FROM subject" +
+                            "  JOIN subject_language " +
+                            "ON subject.id = subject_language.id_subject JOIN language " +
+                            "ON subject_language.id_language=language.id WHERE " +
+                            "subject_language.id_subject=? AND language.iso=? ORDER BY subject.id",
+                    new String[]{id+"", iso+""});
+            k.moveToFirst();
+
+            if ((c.getInt(c.getColumnIndex("cantidad"))*0.30)<=desap.getCount()){
+                arr.add(new String[]{"2",k.getString(0)});
+            }
+            else if((c.getInt(c.getColumnIndex("cantidad"))*0.10)<=desap.getCount()){
+
+                arr.add(new String[]{"1",k.getString(0)});
+
+
+            }
+
+
+        }
+        return arr;
+
+    }
+
 
     //language upercase
     public Cursor getSubject(String idLevel, String languajeISO){
@@ -231,21 +286,18 @@ public class ConnectionDB extends SQLiteOpenHelper {
     }
 
     public Cursor getSubjectLanguageById(String id){
-        Cursor c=getReadableDatabase().query(
-                "subject_language",null,"id LIKE ?",new String[]{id},null,null,null);
+        return getReadableDatabase().query(
+                "subject_language",null,"id LIKE ?",
+                new String[]{id},null,null,null);
 
 
-        if(c.moveToFirst()){
-            return c;
-        }
-        return null;
 
     }
 
     public Long addSubjectLanguage(int id,int idSubject, int idLanguage, String caption){
         SQLiteDatabase db= getWritableDatabase();
 
-        if(getSubjectLanguageById(id+"")==null) {
+        if(!getSubjectLanguageById(id+"").moveToFirst()) {
             ContentValues newSubjectLanguage = new ContentValues();
             newSubjectLanguage.put("id", id);
             newSubjectLanguage.put("id_subject", idSubject);
@@ -259,21 +311,16 @@ public class ConnectionDB extends SQLiteOpenHelper {
     }
 
     public Cursor getSentenceById(String id){
-        Cursor c=getReadableDatabase().query(
+        return getReadableDatabase().query(
                 "sentence",null,"id LIKE ?",new String[]{id},null,null,null);
 
-
-        if(c.moveToFirst()){
-            return c;
-        }
-        return null;
 
     }
 
     public Long addSentence(int id,int idSubject, int idLanguage,int sequence, String caption){
         SQLiteDatabase db= getWritableDatabase();
 
-        if(getSentenceById(id+"")==null) {
+        if(!getSentenceById(id+"").moveToFirst()) {
             ContentValues newSentence = new ContentValues();
             newSentence.put("id", id);
             newSentence.put("id_subject", idSubject);
@@ -288,15 +335,16 @@ public class ConnectionDB extends SQLiteOpenHelper {
     }
 
     public Cursor getSentencesBySequence(String idSubject, String sequence){
-        Cursor c=getReadableDatabase().query(
-                "sentence",null,"id_subject LIKE ? and sequence LIKE ?",new String[]{idSubject, sequence},null,null,"sequence");
-        return c;
+        return getReadableDatabase().query(
+                "sentence",null,"id_subject LIKE ? and sequence LIKE ?",
+                new String[]{idSubject, sequence},null,null,"sequence");
+
     }
 
     public Long addLanguage(int id, String caption, String iso){
         SQLiteDatabase db= getWritableDatabase();
 
-        if(getLanguageById(id+"").equals("")) {
+        if(!getLanguageById(id+"").moveToFirst()) {
 
             ContentValues newLang = new ContentValues();
             newLang.put("id", id);
@@ -322,14 +370,12 @@ public class ConnectionDB extends SQLiteOpenHelper {
         return -1L;
     }
 
-    public String getLanguageById(String id){
-        Cursor c=getReadableDatabase().query(
-                "language",null,"id LIKE ?",new String[]{id},null,null,null);
-        String lang="";
-        if(c.moveToFirst()){
-            lang=c.getString(c.getColumnIndex("iso"));
-        }
-        return lang;
+    public Cursor getLanguageById(String id){
+        return getReadableDatabase().query(
+                "language",null,"id LIKE ?",
+                new String[]{id},null,null,null);
+
+
     }
 
     public Cursor getLevelById(String id){
@@ -402,6 +448,8 @@ public class ConnectionDB extends SQLiteOpenHelper {
         newLog.put("name",name);
 
         return db.insert("user", null, newLog);
+
+
     }
 
     public int deleteUser(String user){
@@ -409,10 +457,6 @@ public class ConnectionDB extends SQLiteOpenHelper {
 
         return db.delete("user", "user = ?",new String[]{user});
     }
-
-
-
-
 
     public int setLangConfigSystem(String lang, String user){
 
@@ -426,7 +470,7 @@ public class ConnectionDB extends SQLiteOpenHelper {
         if(c.moveToFirst()) {
             values.put("id_language", c.getInt(c.getColumnIndex("id")));
         }
-        c.close();
+
         return db.update("user", values, "user = '"+user+"'", null);
     }
 
@@ -475,8 +519,6 @@ public class ConnectionDB extends SQLiteOpenHelper {
     }
 
     //exercises
-
-
     public Cursor getExercisesBySubject(String idSubject){
         return getReadableDatabase().rawQuery(
                "SELECT id, type, order_exercise  FROM exercise_first WHERE id_subject LIKE ?" +
@@ -486,7 +528,6 @@ public class ConnectionDB extends SQLiteOpenHelper {
                " ORDER BY order_exercise", new String[]{idSubject, idSubject, idSubject, idSubject});
 
     }
-
 
     public Cursor getExerciseById(String id, int type){
         String table="";
@@ -509,6 +550,54 @@ public class ConnectionDB extends SQLiteOpenHelper {
 
     }
 
+    public Long addExerciseTypeOne(ContentValues newExercise){
+        Cursor cursor=getReadableDatabase().rawQuery("SELECT * FROM exercise_first " +
+                "WHERE id LIKE ?", new String[]{newExercise.get("id").toString()});
+
+        if(!cursor.moveToFirst()) {
+
+            return getWritableDatabase().insert("exercise_first", null, newExercise);
+        }
+
+        return -1L;
+
+    }
+    public Long addExerciseTypeTwo(ContentValues newExercise){
+        Cursor cursor=getReadableDatabase().rawQuery("SELECT * FROM exercise_second " +
+                "WHERE id LIKE ?", new String[]{newExercise.get("id").toString()});
+
+        if(!cursor.moveToFirst()) {
+
+            return getWritableDatabase().insert("exercise_second", null, newExercise);
+        }
+
+        return -1L;
+
+    }
+    public Long addExerciseTypeThree(ContentValues newExercise){
+        Cursor cursor=getReadableDatabase().rawQuery("SELECT * FROM exercise_third " +
+                "WHERE id LIKE ?", new String[]{newExercise.get("id").toString()});
+
+        if(!cursor.moveToFirst()) {
+
+            return getWritableDatabase().insert("exercise_third", null, newExercise);
+        }
+
+        return -1L;
+
+    }
+    public Long addExerciseTypeFour(ContentValues newExercise){
+        Cursor cursor=getReadableDatabase().rawQuery("SELECT * FROM exercise_fourth " +
+                "WHERE id LIKE ?", new String[]{newExercise.get("id").toString()});
+
+        if(!cursor.moveToFirst()) {
+
+            return getWritableDatabase().insert("exercise_fourth", null, newExercise);
+        }
+
+        return -1L;
+
+    }
 
     //add history app
     public boolean addOrUpdateHistory(int user, int week, int day, int month, int year, double quantity_hours){
@@ -573,5 +662,13 @@ public class ConnectionDB extends SQLiteOpenHelper {
         }
         return 0.0f;
     }
+
+    public Cursor getSequence(String id_subject){
+       return getReadableDatabase().rawQuery(
+                "select sequence from sentence where id_subject LIKE ? GROUP BY sequence",
+               new String[]{id_subject});
+
+    }
+
 
 }

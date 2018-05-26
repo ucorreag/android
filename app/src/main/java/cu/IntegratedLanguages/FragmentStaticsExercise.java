@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -26,6 +27,7 @@ public class FragmentStaticsExercise extends Fragment {
     private Context context;
     private ConnectionDB db;
     private int id_subject;
+    private TextView vDefault,vPass,vDisapprove;
 
     @Nullable
     @Override
@@ -35,6 +37,10 @@ public class FragmentStaticsExercise extends Fragment {
 
         PieChart pieChart=(PieChart)view.findViewById(R.id.pie_chart);
         Button next=(Button) view.findViewById(R.id.btn_next_home);
+
+        vDefault=(TextView)view.findViewById(R.id.value_default);
+        vPass=(TextView)view.findViewById(R.id.value_pass);
+        vDisapprove=(TextView)view.findViewById(R.id.value_disapprove);
 
         id_subject=(getArguments()!=null)?getArguments().getInt("id_subject"):1;
 
@@ -56,8 +62,8 @@ public class FragmentStaticsExercise extends Fragment {
 
     public void staticsEvaluation(PieChart pieChart){
 
-        pieChart.setHoleRadius(40f);
-        pieChart.setUsePercentValues(false);
+        pieChart.setHoleRadius(20f);
+        pieChart.setUsePercentValues(true);
         pieChart.setDrawXValues(true);
         pieChart.setDrawYValues(true);
         pieChart.setDrawXValues(true);
@@ -72,19 +78,23 @@ public class FragmentStaticsExercise extends Fragment {
             int apr = db.getEvaluationSizeBySubject(id,id_subject, 1);
             int dap = db.getEvaluationSizeBySubject(id,id_subject, 2);
 
-            //int tot=def+apr+dap;
+            int tot=def+apr+dap;
 
             ArrayList<Entry> valuesY = new ArrayList<>();
-            valuesY.add(new Entry(def, 0, def));
-            valuesY.add(new Entry(apr, 1, apr));
-            valuesY.add(new Entry(dap, 2, dap));
+            valuesY.add(new Entry((def*100)/tot, 0, def));
+            valuesY.add(new Entry((apr*100)/tot, 1, apr));
+            valuesY.add(new Entry((dap*100)/tot, 2, dap));
 
             String[] valuesX = getResources().getStringArray(R.array.evaluation);
+
+            vDefault.setText(valuesX[0]+": "+def);
+            vPass.setText(valuesX[1]+": "+apr);
+            vDisapprove.setText(valuesX[2]+": "+dap);
 
             ArrayList<Integer> colors = new ArrayList<>();
             colors.add(Color.DKGRAY);
             colors.add(getResources().getColor(R.color.colorPrimary));
-            colors.add(Color.GREEN);
+            colors.add(Color.RED);
 
             PieDataSet set1 = new PieDataSet(valuesY, "");
             set1.setSliceSpace(4f);
@@ -97,6 +107,7 @@ public class FragmentStaticsExercise extends Fragment {
 
             pieChart.setDescription(
                     getResources().getString(R.string.description_evaluation));
+
 
             pieChart.setDrawLegend(true);
         }

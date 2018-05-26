@@ -29,7 +29,43 @@
             android:layout_margin="5dip"
             />
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/value_default"
+        android:padding="2dip"
+        android:layout_marginLeft="@dimen/subject"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:shadowColor="@color/md_grey_350"
+        android:textColor="@color/md_grey_900"
+        android:text="@string/next"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/value_pass"
+        android:padding="2dip"
+        android:layout_marginLeft="@dimen/subject"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:shadowColor="@color/md_grey_350"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/next"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/value_disapprove"
+        android:padding="2dip"
+        android:layout_marginLeft="@dimen/subject"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:shadowColor="@color/md_grey_350"
+        android:textColor="@android:color/holo_red_light"
+        android:text="@string/next"/>
 
+</LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

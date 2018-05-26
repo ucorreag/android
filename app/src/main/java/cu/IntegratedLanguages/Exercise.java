@@ -8,13 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.PriorityBlockingQueue;
 
 import cu.DataBase.ConnectionDB;
-import cu.Plurilingual.ExerciseTypeOne;
-import cu.Plurilingual.Language;
-import cu.Plurilingual.Sentence;
 
 
 @SuppressLint("Registered")
@@ -29,9 +24,6 @@ public class Exercise extends AppCompatActivity {
 
         Intent intent=getIntent();
         int id_subject = intent.getIntExtra("id_subject",1);
-        //int id_user;
-
-        List<cu.Plurilingual.Exercise> listExercises=new LinkedList<>();
 
         ConnectionDB db= new ConnectionDB(this);
         Cursor exercises= db.getExercisesBySubject(id_subject+"");

@@ -9,46 +9,56 @@
     tools:showIn="@layout/activity_sentences"
     android:id="@+id/content_sentences"
      android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:background="@android:color/transparent"
-
-            android:contentDescription="@string/left"
-            tools:ignore="RtlHardcoded"
-            android:id="@+id/btn_left"/>
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@android:color/transparent"
-
-            android:contentDescription="@string/right"
-            tools:ignore="RtlHardcoded"
-            android:id="@+id/btn_right"
-            android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-
-
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:id="@+id/list_sentences"
         android:dividerHeight="10dip"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:layout_margin="@dimen/activity_vertical_margin"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/subject"
+        >
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_more"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/left"
+            android:src="@drawable/ic_action_left"
+            tools:ignore="RtlHardcoded"
+            android:id="@+id/btn_left"/>
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_right"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/right"
+            tools:ignore="RtlHardcoded"
+            android:id="@+id/btn_right"
+            />
+
+
+
 
 
     </RelativeLayout>

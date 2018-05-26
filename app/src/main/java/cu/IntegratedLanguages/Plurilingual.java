@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -31,8 +32,10 @@ public class Plurilingual extends AppCompatActivity
     private ConnectionDB db;
     private int id_user;
     private String user;
-    private Configuration systemConfig= new Configuration();
+    private int id_lang;
 
+    private Configuration systemConfig;
+    private  boolean canExitApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class Plurilingual extends AppCompatActivity
         setContentView(R.layout.activity_plurilingual);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        systemConfig= new Configuration();
+        canExitApp=false;
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("cu.integratedlanguages_preferences", MODE_PRIVATE);
@@ -61,8 +66,13 @@ public class Plurilingual extends AppCompatActivity
         String lang="ES";
         assert c != null;
         if(c.moveToFirst()){
-            String lg=db.getLanguageById(c.getInt(c.getColumnIndex("id_language"))+"");
-            if(!lg.equals(""))lang=lg;
+            Cursor language=db.getLanguageById(c.getInt(
+                    c.getColumnIndex("id_language"))+"");
+                    if(language.moveToFirst()){
+                        lang=language.getString(2);
+                        id_lang=language.getInt(0);
+                    }
+
 
             id_user=c.getInt(c.getColumnIndex("id"));
             user=c.getString(c.getColumnIndex("user"));
@@ -104,7 +114,7 @@ public class Plurilingual extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    boolean canExitApp=false;
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -131,6 +141,7 @@ public class Plurilingual extends AppCompatActivity
                     if(db.isUserActive(id_user)) {
                         history();
                     }
+                    db.close();
                      super.onBackPressed();
                      this.finishAffinity();
 
@@ -151,7 +162,8 @@ public class Plurilingual extends AppCompatActivity
         switch (item.getItemId()){
             case R.id.action_lang:
                  //el 0 es spanish
-                SelectLanguageApp dialogFragment = SelectLanguageApp.newInstance(0, getResources().getStringArray(R.array.language), getString(R.string.lang));
+                SelectLanguageApp dialogFragment = SelectLanguageApp.newInstance(id_lang-1,
+                        getResources().getStringArray(R.array.language), getString(R.string.lang));
                         dialogFragment.show(getSupportFragmentManager(), SelectLanguageApp.class.getSimpleName());
 
                 break;
@@ -163,6 +175,7 @@ public class Plurilingual extends AppCompatActivity
 
                 if (c != null) {
                    c.moveToFirst();
+                   history();
                    String user=c.getString(c.getColumnIndex("user"));
                    db.setLoged(user,0);
                    startActivity( new Intent(this, Login.class));
@@ -275,15 +288,15 @@ public class Plurilingual extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        if(db.isUserActive(id_user)) {
-            history();
-
-        }
-        db.close();
-
         super.onDestroy();
 
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        db.close();
     }
 
     public void history(){
@@ -332,6 +345,7 @@ public class Plurilingual extends AppCompatActivity
                         close.getMonth()+1,
                         close.getYear()+1900,
                         newTime);
+
 
 
             }catch(Exception e){

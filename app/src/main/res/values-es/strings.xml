@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Enfoque Plurilingüe</string>
+    <string name="app_name">Aplicación Plurilingüe Cubana (APCU)</string>
     <string name="title_activity_preferences">Configuración de preferencias</string>
     <string name="title_activity_sentences">Frases</string>
     <string name="title_activity_exercise">Ejercicios</string>

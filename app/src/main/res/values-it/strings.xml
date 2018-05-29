@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Approccio plurilingue</string>
     <string name="title_activity_preferences">Configurazione di preferenze</string>
     <string name="title_activity_sentences">" Frasi"</string>
 
@@ -71,4 +70,5 @@
     <string name="week">Settimana</string>
     <string name="week_now">Settimana corrente</string>
     <string name="year">Anno</string>
+    <string name="app_name">Applicazione Plurilingue Cubana (APCU)</string>
 </resources>

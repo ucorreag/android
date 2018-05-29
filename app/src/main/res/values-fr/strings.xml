@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Approche plurilingue</string>
+    <string name="app_name">Application Plurilingue Cubaine (APCU)</string>
     <string name="title_activity_preferences">Configuration de préférences</string>
     <string name="title_activity_sentences">" Phrases"</string>
 

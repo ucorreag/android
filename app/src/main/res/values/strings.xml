@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Enfoque Plurilingüe</string>
     <string name="title_activity_preferences">Configuración de preferencias</string>
     <string name="title_activity_sentences">Frases</string>
     <string name="title_activity_exercise">Ejercicios</string>
@@ -156,6 +155,7 @@
     <string name="answer_ok">Felicidades. Respondiste bien</string>
     <string name="answer_bad">Ups fallaste, la respuesta es: </string>
     <string name="title_activity_login">Iniciar sesión</string>
-    <string name="project">Proyecto plurilingüe</string>
+    <string name="project" translatable="false">Proyecto plurilingüe</string>
+    <string name="app_name">Aplicación Plurilingüe Cubana (APCU)</string>
 
 </resources>
